@@ -13,13 +13,7 @@ function App() {
   const [articles, setArticles] = useState([]);
 
   // unico oggetto per gestire tutti dati del form
-  const [formData, setFormData] = useState({
-    title: "",
-    image: "",
-    content: "",
-    category: "",
-    isPublic: false,
-  });
+  const [formData, setFormData] = useState(defaultFormData);
 
   // funzione unica per gestire l'evento onChange del form
   const handleFormData = (event) => {
@@ -59,13 +53,7 @@ function App() {
     const newArticle = [...articles, formData];
     setArticles(newArticle);
     // reset value input
-    setFormData({
-      title: "",
-      image: "",
-      content: "",
-      category: "",
-      isPublic: false,
-    });
+    setFormData(defaultFormData);
   };
 
   // gestisce eliminazione di un titolo
@@ -168,7 +156,7 @@ function App() {
               className="list-group-item d-flex flex-column align-items-start py-4"
             >
               <h3>{article.title}</h3>
-              <img src={article.image} alt="Anteprima" />
+              {article.image ? <img src={article.image} alt="" /> : ""}
               <p className="fst-italic">{article.content}</p>
               <p>Categoria: {article.category}</p>
               <p>Pubblicato: {article.isPublic === true ? "Si" : "No"}</p>
