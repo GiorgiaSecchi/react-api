@@ -157,7 +157,7 @@ function App() {
             >
               <h3>{article.title}</h3>
               {article.image ? <img src={article.image} alt="" /> : ""}
-              <p className="fst-italic">{article.content}</p>
+              <p className="fst-italic mt-3">{article.content}</p>
               <p>Categoria: {article.category}</p>
               <p>Pubblicato: {article.isPublic === true ? "Si" : "No"}</p>
               <button
