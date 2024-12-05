@@ -31,12 +31,18 @@ function App() {
     // console.log(newformData);
   };
 
-  // useEffect mostra alert quando so clicca su checkbox per pubblicare articolo
+  //// useEffect mostra alert quando so clicca su checkbox per pubblicare articolo
+  //// useEffect(() => {
+  ////   if (formData.isPublic) {
+  ////     alert("L'articolo verrà pubblicato una volta caricato!");
+  ////   }
+  //// }, [formData.isPublic]);
+
   useEffect(() => {
-    if (formData.isPublic) {
-      alert("L'articolo verrà pubblicato una volta caricato!");
-    }
-  }, [formData.isPublic]);
+    fetch("http://localhost:3000/posts")
+      .then((response) => response.json())
+      .then((data) => setArticles(data));
+  }, []);
 
   // gestisce l'invio nuovi titoli dal form
   const handleSubmit = (event) => {
@@ -153,7 +159,7 @@ function App() {
           {articles.map((article, index) => (
             <li
               key={index}
-              className="list-group-item d-flex flex-column align-items-start py-4"
+              className="list-group-item d-flex flex-column align-items-start py-4 shadow"
             >
               <h3>{article.title}</h3>
               {article.image ? <img src={article.image} alt="" /> : ""}
