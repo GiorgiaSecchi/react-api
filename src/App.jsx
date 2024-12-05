@@ -71,14 +71,29 @@ function App() {
   };
 
   // gestisce eliminazione di un titolo
-  const handleRemoveArticle = (removeIndex) => {
-    const removedArticle = articles[removeIndex];
-    const newArticle = articles.filter((article, index) => {
-      return index !== removeIndex;
-    });
-    setArticles(newArticle);
-    console.log(`L'articolo "${removedArticle}" è stato eliminato.`);
+  const handleRemoveArticle = (id) => {
+    fetch("http://localhost:3000/posts/" + id, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setArticles(data.posts);
+      });
   };
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
+  // // gestisce eliminazione di un titolo
+  // const handleRemoveArticle = (removeIndex) => {
+  //   const removedArticle = articles[removeIndex];
+  //   const newArticle = articles.filter((article, index) => {
+  //     return index !== removeIndex;
+  //   });
+  //   setArticles(newArticle);
+  //   console.log(`L'articolo "${removedArticle}" è stato eliminato.`);
+  // };
 
   return (
     <>
