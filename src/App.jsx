@@ -1,24 +1,25 @@
 import { useState, useEffect } from "react";
 
+const defaultFormData = {
+  title: "",
+  image: "",
+  content: "",
+  category: "",
+  isPublic: false,
+};
+
 function App() {
   // Stato iniziale Array "articles" (vuoto)
   const [articles, setArticles] = useState([]);
 
-  //// Stato iniziale dell'input
-  //// const [addNewArticle, setAddNewArticle] = useState("");
-
   // unico oggetto per gestire tutti dati del form
   const [formData, setFormData] = useState({
     title: "",
+    image: "",
     content: "",
     category: "",
     isPublic: false,
   });
-
-  //// gestisce nuovi titoli inseriti nel input (value)
-  //// const handleInputChange = (event) => {
-  ////  setAddNewArticle(event.target.value);
-  //// };
 
   // funzione unica per gestire l'evento onChange del form
   const handleFormData = (event) => {
@@ -60,6 +61,7 @@ function App() {
     // reset value input
     setFormData({
       title: "",
+      image: "",
       content: "",
       category: "",
       isPublic: false,
@@ -94,6 +96,21 @@ function App() {
               placeholder="Inserisci titolo articolo..."
               name="title"
               value={formData.title}
+              onChange={handleFormData}
+            />
+          </div>
+
+          <div className="mt-4">
+            <label htmlFor="imageInput" className="form-label">
+              URL Immagine
+            </label>
+            <input
+              className="form-control"
+              id="imageInput"
+              type="text"
+              placeholder="Inserisci URL immagine..."
+              name="image"
+              value={formData.image}
               onChange={handleFormData}
             />
           </div>
@@ -151,6 +168,7 @@ function App() {
               className="list-group-item d-flex flex-column align-items-start py-4"
             >
               <h3>{article.title}</h3>
+              {article.image && <img src={article.image} alt="Anteprima" />}
               <p className="fst-italic">{article.content}</p>
               <p>Categoria: {article.category}</p>
               <p>Pubblicato: {article.isPublic === true ? "Si" : "No"}</p>
