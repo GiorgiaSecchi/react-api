@@ -38,10 +38,18 @@ function App() {
   ////   }
   //// }, [formData.isPublic]);
 
-  useEffect(() => {
+  const fetchArticles = () => {
     fetch("http://localhost:3000/posts")
       .then((response) => response.json())
-      .then((data) => setArticles(data));
+      .then((data) => {
+        console.log(data);
+
+        setArticles(data.posts);
+      });
+  };
+
+  useEffect(() => {
+    fetchArticles();
   }, []);
 
   // gestisce l'invio nuovi titoli dal form
