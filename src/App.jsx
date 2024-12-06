@@ -5,6 +5,7 @@ const defaultFormData = {
   titolo: "",
   immagine: "",
   contenuto: "",
+  tags: [],
   category: "",
   isPublic: false,
 };
@@ -191,7 +192,14 @@ function App() {
               <h3>{article.titolo}</h3>
               {article.immagine ? <img src={article.immagine} alt="" /> : ""}
               <p className="fst-italic mt-3">{article.contenuto}</p>
-              <p>Categoria: {article.category}</p>
+              <div>
+                {article.tags.map((tag) => (
+                  <span className="badge rounded-pill text-bg-warning me-3">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <p>{article.category}</p>
               <p>Pubblicato: {article.isPublic === true ? "Si" : "No"}</p>
               <button
                 className="btn btn-outline-danger btn-sm "
