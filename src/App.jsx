@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 const defaultFormData = {
-  id: "",
   titolo: "",
   immagine: "",
   contenuto: "",
@@ -112,7 +111,7 @@ function App() {
               Titolo
             </label>
             <input
-              className="p-2 w-50"
+              className="form-control p-2"
               id="titleInput"
               type="text"
               placeholder="Inserisci titolo articolo..."
@@ -213,7 +212,7 @@ function App() {
               <p>{article.categoria}</p>
               <p>Pubblicato: {article.isPublic === true ? "Si" : "No"}</p>
               <button
-                className="btn btn-outline-danger btn-sm "
+                className="btn btn-outline-danger btn-sm"
                 onClick={() => handleRemoveArticle(id)}
               >
                 Elimina

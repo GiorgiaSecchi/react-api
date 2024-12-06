@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(255, 248, 239);
+}
+
 img {
   /* max-width: 100%; */
   width: 540px;
