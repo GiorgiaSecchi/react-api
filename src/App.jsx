@@ -65,13 +65,20 @@ function App() {
       return;
     }
 
-    console.log(`L'articolo "${formData.titolo}" è stato aggiunto!`);
+    // console.log(`L'articolo "${formData.titolo}" è stato aggiunto!`);
 
-    // aggiunge il nuovo titolo all'array "articles" clonato
-    const newArticle = [...articles, formData];
-    setArticles(newArticle);
-    // reset value input
-    setFormData(defaultFormData);
+    fetch("http://localhost:3000/posts", {
+      method: "POST",
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // aggiunge il nuovo titolo all'array "articles" clonato
+        const newArticle = [...articles, data];
+        setArticles(newArticle);
+        // reset value input
+        setFormData(defaultFormData);
+      });
   };
 
   // gestisce eliminazione di un titolo
@@ -213,7 +220,7 @@ function App() {
               <p>Pubblicato: {article.isPublic === true ? "Si" : "No"}</p>
               <button
                 className="btn btn-outline-danger btn-sm"
-                onClick={() => handleRemoveArticle(id)}
+                onClick={() => handleRemoveArticle(article.id)}
               >
                 Elimina
               </button>
