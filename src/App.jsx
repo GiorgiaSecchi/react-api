@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
 const defaultFormData = {
-  id: null,
+  id: "",
   titolo: "",
   immagine: "",
   contenuto: "",
   tags: [],
-  category: "",
+  categoria: "",
   isPublic: false,
 };
 
@@ -116,7 +116,7 @@ function App() {
               id="titleInput"
               type="text"
               placeholder="Inserisci titolo articolo..."
-              name="title"
+              name="titolo"
               value={formData.titolo}
               onChange={handleFormData}
             />
@@ -131,7 +131,7 @@ function App() {
               id="imageInput"
               type="text"
               placeholder="Inserisci URL immagine..."
-              name="image"
+              name="immagine"
               value={formData.immagine}
               onChange={handleFormData}
             />
@@ -145,7 +145,7 @@ function App() {
               className="form-control"
               id="contentInput"
               rows="3"
-              name="content"
+              name="contenuto"
               value={formData.contenuto}
               onChange={handleFormData}
             ></textarea>
@@ -153,8 +153,8 @@ function App() {
 
           <select
             className="form-select mt-4"
-            name="category"
-            value={formData.category}
+            name="categoria"
+            value={formData.categoria}
             onChange={handleFormData}
           >
             <option defaultValue>Seleziona la categoria...</option>
@@ -190,20 +190,31 @@ function App() {
               className="list-group-item d-flex flex-column align-items-start py-4 shadow"
             >
               <h3>{article.titolo}</h3>
-              {article.immagine ? <img src={article.immagine} alt="" /> : ""}
+              {article.immagine ? (
+                <img
+                  className="img-fluid"
+                  src={`http://localhost:3000${article.immagine}`}
+                  alt=""
+                />
+              ) : (
+                ""
+              )}
               <p className="fst-italic mt-3">{article.contenuto}</p>
               <div>
-                {article.tags.map((tag) => (
-                  <span className="badge rounded-pill text-bg-warning me-3">
+                {article.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="badge rounded-pill text-bg-warning me-3"
+                  >
                     {tag}
                   </span>
                 ))}
               </div>
-              <p>{article.category}</p>
+              <p>{article.categoria}</p>
               <p>Pubblicato: {article.isPublic === true ? "Si" : "No"}</p>
               <button
                 className="btn btn-outline-danger btn-sm "
-                onClick={() => handleRemoveArticle(index)}
+                onClick={() => handleRemoveArticle(id)}
               >
                 Elimina
               </button>
