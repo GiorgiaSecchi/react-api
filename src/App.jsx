@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 
 const defaultFormData = {
-  title: "",
-  image: "",
-  content: "",
+  id: null,
+  titolo: "",
+  immagine: "",
+  contenuto: "",
   category: "",
   isPublic: false,
 };
@@ -59,12 +60,12 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!formData.title || !formData.content) {
+    if (!formData.titolo || !formData.contenuto) {
       alert("Le sezioni titolo e contenuto sono obbligatorie!");
       return;
     }
 
-    console.log(`L'articolo "${formData.title}" è stato aggiunto!`);
+    console.log(`L'articolo "${formData.titolo}" è stato aggiunto!`);
 
     // aggiunge il nuovo titolo all'array "articles" clonato
     const newArticle = [...articles, formData];
@@ -115,7 +116,7 @@ function App() {
               type="text"
               placeholder="Inserisci titolo articolo..."
               name="title"
-              value={formData.title}
+              value={formData.titolo}
               onChange={handleFormData}
             />
           </div>
@@ -130,7 +131,7 @@ function App() {
               type="text"
               placeholder="Inserisci URL immagine..."
               name="image"
-              value={formData.image}
+              value={formData.immagine}
               onChange={handleFormData}
             />
           </div>
@@ -144,7 +145,7 @@ function App() {
               id="contentInput"
               rows="3"
               name="content"
-              value={formData.content}
+              value={formData.contenuto}
               onChange={handleFormData}
             ></textarea>
           </div>
@@ -187,9 +188,9 @@ function App() {
               key={index}
               className="list-group-item d-flex flex-column align-items-start py-4 shadow"
             >
-              <h3>{article.title}</h3>
-              {article.image ? <img src={article.image} alt="" /> : ""}
-              <p className="fst-italic mt-3">{article.content}</p>
+              <h3>{article.titolo}</h3>
+              {article.immagine ? <img src={article.immagine} alt="" /> : ""}
+              <p className="fst-italic mt-3">{article.contenuto}</p>
               <p>Categoria: {article.category}</p>
               <p>Pubblicato: {article.isPublic === true ? "Si" : "No"}</p>
               <button
