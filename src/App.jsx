@@ -45,7 +45,10 @@ function App() {
         console.log(data);
 
         setArticles(data.posts);
-      });
+      })
+      .catch((error) =>
+        console.error("Errore nel caricamento degli articoli:", error)
+      );
   };
 
   useEffect(() => {
@@ -75,9 +78,9 @@ function App() {
     fetch("http://localhost:3000/posts/" + id, {
       method: "DELETE",
     })
-      .then((res) => res.json())
-      .then((data) => {
-        setArticles(data.posts);
+      .then((res) => res)
+      .then(() => {
+        fetchArticles();
       });
   };
 
